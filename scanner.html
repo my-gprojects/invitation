@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Scanner Check-in — Wedding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Calibri&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="scanner.css" />
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+</head>
+<body>
+  <main class="scanner-app">
+    <header class="scanner-header">
+      <h1>Check-in Tamu</h1>
+      <p>Scan QR di undangan, lalu isi jumlah orang</p>
+    </header>
+
+    <section class="scanner-panel" id="scanPanel">
+      <div id="reader"></div>
+      <p class="hint" id="scanHint">Arahkan kamera ke QR code undangan</p>
+      <button type="button" class="btn btn-secondary" id="stopScanBtn" hidden>Stop kamera</button>
+    </section>
+
+    <section class="checkin-panel" id="checkinPanel" hidden>
+      <div class="guest-card">
+        <p class="label">Tamu</p>
+        <p class="name" id="scannedName">—</p>
+        <p class="key" id="scannedKey">—</p>
+      </div>
+
+      <form id="checkinForm">
+        <label for="jumlahOrang">Jumlah orang</label>
+        <input type="number" id="jumlahOrang" name="jumlah_orang" min="1" max="50" value="1" required />
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary" id="submitBtn">Simpan Hadir</button>
+          <button type="button" class="btn btn-secondary" id="rescanBtn">Scan lagi</button>
+        </div>
+      </form>
+
+      <p class="status-msg" id="statusMsg" hidden></p>
+    </section>
+
+    <p class="config-warn" id="configWarn" hidden>
+      Isi <code>appsScriptUrl</code> di <code>config.js</code> dulu.
+      Lihat panduan di <code>google-apps-script/Code.gs</code>.
+    </p>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="guest-utils.js"></script>
+  <script src="scanner.js"></script>
+</body>
+</html>
