@@ -108,6 +108,7 @@ body.opened .decor { opacity: 1; }
   height: 100vh;
   width: clamp(200px, 38vw, 380px);
   z-index: 2;
+  position: fixed;
 }
 
 .decor-janur-left  { left: 0; }
@@ -171,7 +172,11 @@ body.opened .decor { opacity: 1; }
 }
 
 .creature-behind {
-  z-index: 5;
+  z-index: 1;
+}
+
+.creature-mid {
+  z-index: 2;
 }
 
 .creature-sprite {
@@ -508,6 +513,55 @@ body.opened .gate-right { transform: translateX(100%); }
 
 .open-btn:hover::before { transform: scaleX(1); }
 
+.open-music-hint {
+  margin-top: 14px;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+.music-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 90;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: rgba(45, 3, 8, 0.85);
+  color: var(--gold-light);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px var(--gold-glow);
+}
+
+.music-toggle[hidden] {
+  display: none;
+}
+
+.music-toggle.is-muted {
+  opacity: 0.55;
+}
+
+.music-toggle.is-muted .music-icon::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 2px;
+  background: var(--crimson-bright);
+  transform: rotate(-45deg);
+}
+
+.music-toggle .music-icon {
+  position: relative;
+  display: inline-flex;
+}
+
 /* ─── Main invitation ─── */
 .invitation {
   position: relative;
@@ -532,6 +586,8 @@ body.opened .invitation { opacity: 1; }
 
 .footer {
   flex-shrink: 0;
+  position: relative;
+  z-index: 3;
 }
 
 /* ─── Crown header (inside card) ─── */
@@ -678,8 +734,25 @@ body.opened .invitation { opacity: 1; }
 .details-card {
   margin-bottom: 16px;
   position: relative;
-  z-index: 2;
+  z-index: auto;
   flex-shrink: 0;
+}
+
+.card-chrome {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-chrome .frame {
+  height: 100%;
+}
+
+.card-chrome .frame-inner {
+  height: 100%;
+  min-height: 100%;
+  background: transparent;
 }
 
 .frame {
@@ -696,6 +769,7 @@ body.opened .invitation { opacity: 1; }
 .frame-mid {
   background: linear-gradient(135deg, var(--crimson), var(--crimson-deep));
   padding: 2px;
+  height: 100%;
 }
 
 .frame-inner {
@@ -705,8 +779,12 @@ body.opened .invitation { opacity: 1; }
 }
 
 .details-content {
+  position: relative;
+  z-index: 3;
   padding: 32px 28px;
   border: 1px solid rgba(232, 184, 48, 0.25);
+  background: rgba(45, 3, 8, 0.92);
+  backdrop-filter: blur(6px);
 }
 
 .corner {
@@ -916,8 +994,17 @@ body.opened [data-delay="3.2"] { animation-delay: 3.2s; }
     max-height: 100vh;
   }
   .details-content { padding: 16px 12px; }
-  .details-row { flex-direction: column; align-items: center; gap: 16px; }
-  .details-row .detail-block { max-width: 100%; }
+  .details-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .details-row .detail-block {
+    max-width: 100%;
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+  }
   .detail-block { gap: 10px; }
   .decor-tiang { width: clamp(55px, 12vw, 85px); }
   .decor-janur { width: clamp(140px, 32vw, 220px); }

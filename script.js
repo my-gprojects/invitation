@@ -1,13 +1,48 @@
 const openBtn = document.getElementById('openBtn');
 const openOverlay = document.getElementById('openOverlay');
+const backsound = document.getElementById('backsound');
+const musicToggle = document.getElementById('musicToggle');
+const musicIcon = document.getElementById('musicIcon');
 
 initGuestName();
 
-openBtn.addEventListener('click', () => {
+openBtn.addEventListener('click', async () => {
   openOverlay.classList.add('hidden');
   document.body.classList.add('opened');
   startParticles();
+  await startBacksound();
 });
+
+musicToggle?.addEventListener('click', async () => {
+  if (!backsound) return;
+  if (backsound.paused) {
+    try {
+      await backsound.play();
+      musicToggle.classList.remove('is-muted');
+      musicIcon.textContent = '♪';
+    } catch (_) {
+      // ignore
+    }
+  } else {
+    backsound.pause();
+    musicToggle.classList.add('is-muted');
+    musicIcon.textContent = '♪';
+  }
+});
+
+async function startBacksound() {
+  if (!backsound) return;
+  backsound.volume = 0.55;
+  try {
+    await backsound.play();
+    musicToggle.hidden = false;
+    musicToggle.classList.remove('is-muted');
+  } catch (_) {
+    // Autoplay may still fail; show toggle so user can start manually
+    musicToggle.hidden = false;
+    musicToggle.classList.add('is-muted');
+  }
+}
 
 // ─── Golden & red particle system ───
 function startParticles() {

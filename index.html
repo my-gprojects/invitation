@@ -17,12 +17,6 @@
   <div class="decor decor-gapura" aria-hidden="true">
     <img src="assets/decor/gapura.png" alt="" />
   </div>
-  <div class="decor decor-janur decor-janur-left">
-    <img src="assets/decor/janur_kiri.png" alt="" />
-  </div>
-  <div class="decor decor-janur decor-janur-right">
-    <img src="assets/decor/janur_kanan.png" alt="" />
-  </div>
   <div class="decor decor-tiang decor-tiang-left">
     <img src="assets/decor/tiang_kiri.png" alt="" />
   </div>
@@ -37,11 +31,6 @@
 
   <div class="creature creature-setan creature-front" aria-hidden="true">
     <img src="assets/setan/setan.png" alt="" class="setan-img" />
-  </div>
-
-  <!-- Elang di belakang kartu info -->
-  <div class="creature creature-eagle creature-behind" aria-hidden="true">
-    <div class="creature-sprite creature-sprite-eagle"></div>
   </div>
 
   <!-- Kucing Kicau Mania (kecil, joget di bawah) -->
@@ -59,67 +48,82 @@
   <div class="gate gate-left"></div>
   <div class="gate gate-right"></div>
 
+  <audio id="backsound" src="backsound.mp3" loop preload="auto"></audio>
+
   <main class="invitation">
+    <!-- Janur & elang: di depan frame card, di belakang teks informasi -->
+    <div class="decor decor-janur decor-janur-left" aria-hidden="true">
+      <img src="assets/decor/janur_kiri.png" alt="" />
+    </div>
+    <div class="decor decor-janur decor-janur-right" aria-hidden="true">
+      <img src="assets/decor/janur_kanan.png" alt="" />
+    </div>
+    <div class="creature creature-eagle creature-mid" aria-hidden="true">
+      <div class="creature-sprite creature-sprite-eagle"></div>
+    </div>
+
     <section class="details-card animate-rise" data-delay="1.6">
-      <div class="frame frame-outer">
-        <div class="frame frame-mid">
-          <div class="frame frame-inner">
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-tr"></div>
-            <div class="corner corner-bl"></div>
-            <div class="corner corner-br"></div>
+      <div class="card-chrome" aria-hidden="true">
+        <div class="frame frame-outer">
+          <div class="frame frame-mid">
+            <div class="frame frame-inner">
+              <div class="corner corner-tl"></div>
+              <div class="corner corner-tr"></div>
+              <div class="corner corner-bl"></div>
+              <div class="corner corner-br"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="details-content">
-              <header class="crown-header">
-                <svg class="crown-svg animate-scale" data-delay="1" viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <linearGradient id="crownGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#fff0aa"/>
-                      <stop offset="50%" stop-color="#ffd700"/>
-                      <stop offset="100%" stop-color="#b8860b"/>
-                    </linearGradient>
-                  </defs>
-                  <path d="M10 50 L10 30 L25 40 L40 20 L60 35 L80 20 L95 40 L110 30 L110 50 Z" fill="url(#crownGold)" stroke="#8B6914" stroke-width="1.5"/>
-                  <circle cx="25" cy="28" r="4" fill="#cc1111"/>
-                  <circle cx="60" cy="22" r="5" fill="#cc1111"/>
-                  <circle cx="95" cy="28" r="4" fill="#cc1111"/>
-                  <rect x="10" y="50" width="100" height="6" rx="1" fill="url(#crownGold)" stroke="#8B6914" stroke-width="1"/>
-                </svg>
-                <div class="ornament ornament-top">✦ ♛ ✦</div>
-                <p class="pre-title animate-fade" data-delay="1.2">The Royal Wedding</p>
-              </header>
+      <div class="details-content">
+        <header class="crown-header">
+          <svg class="crown-svg animate-scale" data-delay="1" viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="crownGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fff0aa"/>
+                <stop offset="50%" stop-color="#ffd700"/>
+                <stop offset="100%" stop-color="#b8860b"/>
+              </linearGradient>
+            </defs>
+            <path d="M10 50 L10 30 L25 40 L40 20 L60 35 L80 20 L95 40 L110 30 L110 50 Z" fill="url(#crownGold)" stroke="#8B6914" stroke-width="1.5"/>
+            <circle cx="25" cy="28" r="4" fill="#cc1111"/>
+            <circle cx="60" cy="22" r="5" fill="#cc1111"/>
+            <circle cx="95" cy="28" r="4" fill="#cc1111"/>
+            <rect x="10" y="50" width="100" height="6" rx="1" fill="url(#crownGold)" stroke="#8B6914" stroke-width="1"/>
+          </svg>
+          <div class="ornament ornament-top">✦ ♛ ✦</div>
+          <p class="pre-title animate-fade" data-delay="1.2">The Royal Wedding</p>
+        </header>
 
-              <div class="guest-block" id="guestBlock" hidden>
-                <p class="guest-label">Kepada Yth.</p>
-                <p class="guest-name" id="guestName"></p>
-                <div class="guest-qr" id="guestQrWrap" hidden>
-                  <div id="guestQr"></div>
-                  <p class="guest-qr-label">Tunjukkan QR ini saat check-in</p>
-                  <p class="guest-qr-key" id="guestQrKey"></p>
-                </div>
-              </div>
+        <div class="guest-block" id="guestBlock" hidden>
+          <p class="guest-label">Kepada Yth.</p>
+          <p class="guest-name" id="guestName"></p>
+          <div class="guest-qr" id="guestQrWrap" hidden>
+            <div id="guestQr"></div>
+            <p class="guest-qr-label">Tunjukkan QR ini saat check-in</p>
+            <p class="guest-qr-key" id="guestQrKey"></p>
+          </div>
+        </div>
 
-              <p class="invitation-text">Dengan penuh sukacita, kami mengundang Anda untuk hadir di perayaan pernikahan kami</p>
+        <p class="invitation-text">Dengan penuh sukacita, kami mengundang Anda untuk hadir di perayaan pernikahan kami</p>
 
-              <div class="details-row">
-                <div class="detail-block">
-                  <span class="detail-icon">📅</span>
-                  <div>
-                    <h3>Tanggal</h3>
-                    <p>Sabtu, 15 November 2026</p>
-                    <p class="sub">Pukul 10.00 WIB</p>
-                  </div>
-                </div>
+        <div class="details-row">
+          <div class="detail-block">
+            <span class="detail-icon">📅</span>
+            <div>
+              <h3>Tanggal</h3>
+              <p>Sabtu, 15 November 2026</p>
+              <p class="sub">Pukul 10.00 WIB</p>
+            </div>
+          </div>
 
-                <div class="detail-block">
-                  <span class="detail-icon">🏰</span>
-                  <div>
-                    <h3>Tempat</h3>
-                    <p>Grand Ballroom Hotel Majapahit</p>
-                    <p class="sub">Jl. Raya Keraton No. 88, Surabaya</p>
-                  </div>
-                </div>
-              </div>
+          <div class="detail-block">
+            <span class="detail-icon">🏰</span>
+            <div>
+              <h3>Tempat</h3>
+              <p>Grand Ballroom Hotel Majapahit</p>
+              <p class="sub">Jl. Raya Keraton No. 88, Surabaya</p>
             </div>
           </div>
         </div>
@@ -151,8 +155,13 @@
       <button class="open-btn" id="openBtn">
         <span>Buka Gerbang Kerajaan</span>
       </button>
+      <p class="open-music-hint">Musik akan diputar saat undangan dibuka</p>
     </div>
   </div>
+
+  <button type="button" class="music-toggle" id="musicToggle" aria-label="Toggle musik" hidden>
+    <span class="music-icon" id="musicIcon">♪</span>
+  </button>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="config.js"></script>
